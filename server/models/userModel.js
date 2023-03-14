@@ -3,17 +3,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    userName: {
+    name: {
         type: String,
         required: true,
         unique: true
     },
     phone: {
-        type: String,
+        type: Number,
+        required: true,
         unique: true
     },
     email: {
         type: String,
+        required: true,
         unique: true
     },
     image: {
@@ -26,4 +28,4 @@ const userSchema = new Schema({
     contacts: [Schema.Types.ObjectId]
 });
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('User', userSchema);
