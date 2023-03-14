@@ -1,17 +1,21 @@
 const express = require("express");
 const User = require("../models/userModel");
 const httpError = require("../models/httpErrorModel");
+const userMessageBox = require('../models/userMessageBoxModel');
+const mongoose = require("mongoose");
 
 const router = express.Router();
 
 router.post("/login", async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, phone, password } = req.body;
   let existingUser;
 
   try {
-    existingUser = User.find({ email });
+    if (email) existingUser = await User.findOne({ email });
+    else if (phone) existingUser = await User.findOne({ phone });
   } catch (err) {
-    const error = new HttpError("Login failed!", 500);
+    console.log(err);
+    const error = new httpError("Login failed!", 500);
     return next(error);
   }
 
@@ -29,7 +33,54 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/signup", async (req, res, next) => {
-    const { userName, email, image, password } = req.body;
+  const { name, phone, email, image, password } = req.body;
+  let existingUser;
+
+  try {
+    existingUser = await User.findOne({ email, phone });
+  } catch (err) {
+    console.log(err);
+    const error = new httpError("Signup failed!", 500);
+    return next(error);
+  }
+
+  console.log(existingUser)
+
+  if (existingUser) {
+    const error = new httpError("User already exist", 422);
+    return next(error);
+  }
+
+  const newUser = new User({
+    name,
+    phone,
+    email,
+    image,
+    password,
+    contacts: [],
+  });
+
+  const newMessageBox = new userMessageBox({
+    userId: newUser.id,
+    outMessages: [],
+    inMessages: []
+  })
+
+  // console.log(newUser, newMessageBox)
+
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await newUser.save();
+    await newMessageBox.save();
+    await sess.commitTransaction();
+  } catch (err) {
+    console.log(err)
+    const error = new httpError("Signup failed", 500);
+    return next(error);
+  }
+
+  res.status(201).json({ user: newUser });
 });
 
 module.exports = router;
