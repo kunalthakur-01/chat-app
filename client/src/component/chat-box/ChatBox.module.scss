@@ -1,0 +1,39 @@
+.chatbox_section {
+    width: 100%;
+    height: 100vh;
+    padding: 1rem;
+    background-color: var(--primary_color1);
+    display: grid;
+    // grid-template-columns: 19% 30% 49%;
+    grid-template-columns: 20% 0.5fr 1fr;
+    gap: 1rem;
+    color: var(--text_color);
+}
+
+.admin_panel {
+    padding: 2rem 1rem;
+}
+
+.app_logo {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    img {
+        height: 4rem;
+        margin-right: 1rem;
+    }
+}
+
+// .admin_panel {
+//     background-color: #00000076;
+// }
+
+// .all_messages {
+//     background-color: #00000076;
+// }
+
+// .message_box {
+//     background-color: #00000076;
+// }
