@@ -2,22 +2,17 @@ import React from "react";
 
 import classes from "./ChatBox.module.scss";
 
-import logo from "../../assets/logo.svg";
 import { FaBeer } from "react-icons/fa";
+import AdminPanel from "./admin-panel/AdminPanel";
+import AllContacts from "./all-contact/AllContacts";
+import MessageBox from "./message-box/MessageBox";
 
 const ChatBox: React.FC = () => {
   return (
     <section className={classes.chatbox_section}>
-      <div className={`${classes.admin_panel} box_container`}>
-        <div className={classes.app_logo}>
-          <img src={logo} alt="my-logo" />
-          <h2>SNAPPY</h2>
-        </div>
-        <hr />
-        
-      </div>
-      <div className={`${classes.all_messages} box_container`}></div>
-      <div className={`${classes.message_box} box_container`}></div>
+      <AdminPanel />
+      <AllContacts />
+      <MessageBox />
     </section>
   );
 };
