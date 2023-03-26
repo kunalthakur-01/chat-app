@@ -58,6 +58,7 @@ router.post("/signup", async (req, res, next) => {
     image,
     password,
     contacts: [],
+    pinnedContacts: [],
   });
 
   const newMessageBox = new userMessageBox({
