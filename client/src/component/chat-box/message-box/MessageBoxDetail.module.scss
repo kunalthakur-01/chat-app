@@ -1,0 +1,52 @@
+.MessageBoxDetail_section {
+    padding: 0 4%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.about_contact_section {
+    display: flex;
+
+    img {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        margin-right: 1.5rem;
+    }
+}
+
+.about_detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h3 {
+        // font-family: 'Alkatra', cursive;
+        // font-family: 'Roboto Mono', monospace;
+        // font-family: 'Poppins', sans-serif;
+        // font-family: 'Ubuntu', sans-serif;
+        font-size: 24px;
+        // letter-spacing: 1px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    p {
+        color: var(--status_color);
+    }
+}
+
+.others_features {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+
+    span {
+        margin-left: 18px;
+        font-size: 19px;
+        cursor: pointer;
+    }
+}
