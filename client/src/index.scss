@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Alkatra&family=Libre+Baskerville&family=Roboto&family=Ubuntu:wght@500&display=swap');
+
 
 // $primary_color1: #131324;
 // $dark_color1: #121212;
@@ -10,6 +12,9 @@
   --dark_border_color1: #4e0eff;
   --dark_border_color2: #997af0;
   --text_color: white;
+  --light_color: rgba(101, 101, 101, 0.693);
+  --light_color2: rgb(164, 164, 164);
+  --status_color: rgb(0, 149, 0);
 }
 
 * {
