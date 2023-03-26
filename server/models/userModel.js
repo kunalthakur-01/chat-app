@@ -25,7 +25,8 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    contacts: [Schema.Types.ObjectId]
+    contacts: [Schema.Types.ObjectId],
+    pinnedContacts: [Schema.Types.ObjectId]
 });
 
 module.exports = mongoose.model('User', userSchema);
