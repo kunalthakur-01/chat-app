@@ -1,0 +1,30 @@
+.send_message_form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary_color1);
+    // position: absolute;
+    // bottom: 20px;
+    // left: 0;
+    padding: 15px 20px;
+    border-radius: 30px;
+    
+    input {
+        background-color: transparent;
+        flex-basis: 90%;
+        border: none;
+        outline: none;
+        font-size: 17px;
+        color: var(--white);
+    }
+    
+    button {
+        background-color: transparent;
+        display: grid;
+        place-items: center;
+        border: none;
+        color: var(--white);
+        font-size: 22px;
+        cursor: pointer;
+    }
+}
