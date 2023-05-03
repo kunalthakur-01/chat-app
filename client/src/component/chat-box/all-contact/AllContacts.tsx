@@ -3,8 +3,8 @@ import React from "react";
 import classes from "./AllContacts.module.scss";
 
 import { FiSearch } from "react-icons/fi";
-import PinnedMessages from "./PinnedMessages";
-import AllMessages from "./AllMessages";
+import PinnedContacts from "./PinnedContacts";
+import UnpinnedContacts from "./UnpinnedContacts";
 
 const AllContacts: React.FC = () => {
   return (
@@ -16,8 +16,8 @@ const AllContacts: React.FC = () => {
         </button>
       </div>
       <div className={classes.all_messages}>
-        <PinnedMessages />
-        <AllMessages />
+        <PinnedContacts />
+        <UnpinnedContacts />
       </div>
     </div>
   );
