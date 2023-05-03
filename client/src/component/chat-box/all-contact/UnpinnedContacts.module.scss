@@ -1,0 +1,14 @@
+.all_messages_section {
+    color: white;
+    p {
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        color: var(--light_color);
+        font-size: 15px;
+    }
+}
+
+.all_messages_list {
+    margin: 15px 0;
+}
