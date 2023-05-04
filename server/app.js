@@ -5,6 +5,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userAuthRoute = require("./routes/userAuthRoutes");
 const userMessageBoxRoute = require("./routes/userMessageBoxRoute");
+const userContactsRoute = require("./routes/userContactsRoutes");
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -16,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api/auth", userAuthRoute);
 
 app.use("/api/message", userMessageBoxRoute);
+
+app.use("/api/contact", userContactsRoute);
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
