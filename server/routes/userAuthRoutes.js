@@ -37,7 +37,17 @@ router.post("/signup", async (req, res, next) => {
   let existingUser;
 
   try {
-    existingUser = await User.findOne({ email, phone });
+    existingUser = await User.findOne({ email });
+    if(existingUser){
+      const error = new httpError("Email already exist", 422);
+      return next(error);
+    }
+    existingUser = await User.findOne({ phone });
+    if(existingUser){
+      const error = new httpError("Phone already exist", 422);
+      return next(error);
+    }
+    existingUser = await User.findOne({ name });
   } catch (err) {
     console.log(err);
     const error = new httpError("Signup failed!", 500);
@@ -47,7 +57,7 @@ router.post("/signup", async (req, res, next) => {
   // console.log(existingUser)
 
   if (existingUser) {
-    const error = new httpError("User already exist", 422);
+    const error = new httpError("Username already exist", 422);
     return next(error);
   }
 
