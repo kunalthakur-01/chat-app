@@ -5,7 +5,7 @@ import classes from "./PinnedContacts.module.scss";
 import { TbPinnedFilled } from "react-icons/tb";
 import ContactComponent from "./ContactComponent";
 
-const PinnedContacts: React.FC = () => {
+const PinnedContacts = () => {
   return (
     <div className={classes.pinned_section}>
       <p>

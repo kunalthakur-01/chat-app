@@ -1,7 +1,7 @@
 import React from "react";
 import RegisterForm from "../component/authentication/RegisterForm";
 
-const Register: React.FC = () => {
+const Register = () => {
   return (
     <>
       <RegisterForm />

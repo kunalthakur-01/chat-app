@@ -7,7 +7,7 @@ import AdminPanel from "./admin-panel/AdminPanel";
 import AllContacts from "./all-contact/AllContacts";
 import MessageBox from "./message-box/MessageBox";
 
-const ChatBox: React.FC = () => {
+const ChatBox = () => {
   return (
     <section className={classes.chatbox_section}>
       <AdminPanel />

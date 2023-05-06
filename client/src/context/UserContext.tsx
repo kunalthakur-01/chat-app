@@ -1,11 +1,7 @@
 import React from "react";
 
-type UserContextObj = {
-  login: () => void;
-  logout: () => void;
-};
 
-const UserContextManage = React.createContext<UserContextObj>({
+const UserContextManage = React.createContext({
   login: () => {},
   logout: () => {},
 });
@@ -14,7 +10,7 @@ const UserContextProvider = (props: any) => {
   const loginHandler = () => {};
   const logoutHandler = () => {};
 
-  const UserContextValue: UserContextObj = {
+  const UserContextValue = {
     login: loginHandler,
     logout: logoutHandler,
   };

@@ -6,7 +6,7 @@ import { FiSearch } from "react-icons/fi";
 import PinnedContacts from "./PinnedContacts";
 import UnpinnedContacts from "./UnpinnedContacts";
 
-const AllContacts: React.FC = () => {
+const AllContacts = () => {
   return (
     <div className={`${classes.all_contacts_section} box_container`}>
       <div className={classes.top_section}>

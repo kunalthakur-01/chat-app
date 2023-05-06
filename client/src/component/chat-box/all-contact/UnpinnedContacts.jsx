@@ -6,7 +6,7 @@ import ContactComponent from './ContactComponent';
 import { MdOutlineMessage } from "react-icons/md";
 
 
-const UnpinnedContacts:React.FC = () => {
+const UnpinnedContacts = () => {
   return (
     <div className={classes.all_messages_section}>
       <p>

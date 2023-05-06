@@ -2,7 +2,7 @@ import React from "react";
 
 import classes from "./ContactComponent.module.scss";
 
-const ContactComponent: React.FC = () => {
+const ContactComponent= () => {
   return (
     <li className={classes.Contact_component}>
       <div className={classes.contact_detail_section}>

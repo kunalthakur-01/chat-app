@@ -1,20 +1,15 @@
 import React from "react";
 
-type ContactContextObj = {
-  login: () => void;
-  logout: () => void;
-};
-
-const ContactContextManage = React.createContext<ContactContextObj>({
+const ContactContextManage = React.createContext({
   login: () => {},
   logout: () => {},
 });
 
-const ContactContextProvider = (props: any) => {
+const ContactContextProvider = (props) => {
   const loginHandler = () => {};
   const logoutHandler = () => {};
 
-  const ContactContextValue: ContactContextObj = {
+  const ContactContextValue = {
     login: loginHandler,
     logout: logoutHandler,
   };
