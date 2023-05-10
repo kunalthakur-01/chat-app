@@ -16,7 +16,7 @@ export const signup = async (body) => {
 };
 
 export const login = async (body) => {
-    const response = await fetch('http://localhost:3000/api/auth/login', {
+    const response = await fetch('http://localhost:5000/api/auth/login', {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
