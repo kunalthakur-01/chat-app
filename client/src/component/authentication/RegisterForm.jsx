@@ -22,7 +22,7 @@ const RegisterForm  = () => {
     if(data && !error) {
       ctx.login(data, null);
     }
-  })
+  }, [ctx, data, error]);
 
   useEffect(() => {
     if (status === "completed" && !error) {
