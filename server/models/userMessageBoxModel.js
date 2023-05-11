@@ -3,14 +3,24 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userMessageBoxSchema = new Schema({
-  userId: {
+  // userId: {
+  //   type: Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: "User",
+  // },
+  // unseenMessages: {
+  //     type: Number
+  // },
+  user1: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: "User",
   },
-  // unseenMessages: {
-  //     type: Number
-  // },
+  user2: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
   outMessages: [
     {
       receiverid: {
@@ -45,6 +55,23 @@ const userMessageBoxSchema = new Schema({
       },
     },
   ],
+  allMessages: [
+    {
+      userId: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "User",
+      },
+      message: {
+        type: String,
+        required: true,
+      },
+      time: {
+        type: String,
+        required: true,
+      },
+    },
+  ]
 });
 
 module.exports = mongoose.model("Usermessagebox", userMessageBoxSchema);
