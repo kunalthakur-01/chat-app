@@ -23,11 +23,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  messageBox: {
-    type: Schema.Types.ObjectId,
-    ref: "Usermessagebox",
-    required: true
-  },
   contacts: [
     {
       type: Schema.Types.ObjectId,
