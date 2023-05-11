@@ -11,8 +11,8 @@ router.post("/login", async (req, res, next) => {
   let existingUser;
 
   try {
-    if (email) existingUser = await User.findOne({ email }).populate('contacts');
-    else if (phone) existingUser = await User.findOne({ phone }).populate('contacts');
+    if (email) existingUser = await User.findOne({ email }).populate('contacts', "name email");
+    else if (phone) existingUser = await User.findOne({ phone }).populate('contacts', "name email");
   } catch (err) {
     console.log(err);
     const error = new httpError("Login failed!", 500);
@@ -71,22 +71,24 @@ router.post("/signup", async (req, res, next) => {
     pinnedContacts: [],
   });
 
-  const newMessageBox = new userMessageBox({
-    userId: newUser.id,
-    outMessages: [],
-    inMessages: []
-  })
+  // const newMessageBox = new userMessageBox({
+  //   userId: newUser.id,
+  //   outMessages: [],
+  //   inMessages: []
+  // })
 
-  newUser.messageBox = newMessageBox.id;
+  // newUser.messageBox = newMessageBox.id;
 
   // console.log(newUser, newMessageBox)
 
   try {
-    const sess = await mongoose.startSession();
-    sess.startTransaction();
+    // const sess = await mongoose.startSession();
+    // sess.startTransaction();
+    // await newUser.save();
+    // await newMessageBox.save();
+    // await sess.commitTransaction();
+
     await newUser.save();
-    await newMessageBox.save();
-    await sess.commitTransaction();
   } catch (err) {
     console.log(err)
     const error = new httpError("Signup failed", 500);
