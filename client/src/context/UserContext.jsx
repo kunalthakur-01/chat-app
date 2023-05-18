@@ -3,13 +3,13 @@ import React, { useState } from "react";
 
 export const UserContextManage = React.createContext({
   token: null,
-  userData: {},
+  userData: null,
   login: () => {},
   logout: () => {},
 });
 
 export const UserContextProvider = (props) => {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(null);
   const [token, setToken] = useState(null);
   console.log(userData)
 
@@ -18,7 +18,7 @@ export const UserContextProvider = (props) => {
     setToken(token);
   };
   const logoutHandler = () => {
-    setUserData({});
+    setUserData(null);
     setToken(null);
   };
 
