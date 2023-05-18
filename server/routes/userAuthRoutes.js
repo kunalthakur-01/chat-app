@@ -1,8 +1,6 @@
 const express = require("express");
 const User = require("../models/userModel");
 const httpError = require("../models/httpErrorModel");
-const userMessageBox = require('../models/userMessageBoxModel');
-const mongoose = require("mongoose");
 
 const router = express.Router();
 
@@ -11,8 +9,8 @@ router.post("/login", async (req, res, next) => {
   let existingUser;
 
   try {
-    if (email) existingUser = await User.findOne({ email }).populate('contacts', "name email");
-    else if (phone) existingUser = await User.findOne({ phone }).populate('contacts', "name email");
+    if (email) existingUser = await User.findOne({ email }).populate('contacts', 'name email');
+    else if (phone) existingUser = await User.findOne({ phone }).populate('contacts', 'name email');
   } catch (err) {
     console.log(err);
     const error = new httpError("Login failed!", 500);
@@ -28,6 +26,14 @@ router.post("/login", async (req, res, next) => {
     const error = new httpError("Invalid credentials!", 401);
     return next(error);
   }
+
+  // existingUser = existingUser
+  //   .populate("contacts")
+    // .populate({
+    //   path: "contacts",
+    //   populate: { path: "messageBox" },
+    //   select: "messageBox",
+    // });
 
   res.status(200).json({ user: existingUser });
 });
@@ -69,6 +75,7 @@ router.post("/signup", async (req, res, next) => {
     password,
     contacts: [],
     pinnedContacts: [],
+    messageBoxes: []
   });
 
   // const newMessageBox = new userMessageBox({
