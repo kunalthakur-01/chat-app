@@ -17,13 +17,15 @@ router.post("/add", async (req, res, next) => {
     // );
     existingUser = await User.findById(userId);
     isContactValid = await User.findById(contact);
-    isUsersMessageBoxExist = await UserMessageBox.findOne({
-      user1: userId,
-      user2: contact,
-    });
-
-    if (!isUsersMessageBoxExist)
-      await UserMessageBox.findOne({ user1: contact, user2: userId });
+    isUsersMessageBoxExist =
+      (await UserMessageBox.findOne({
+        user1: userId,
+        user2: contact,
+      })) ||
+      (await UserMessageBox.findOne({
+        user1: contact,
+        user2: userId,
+      }));
   } catch (err) {
     const error = new httpError("Something went wrong!", 500);
     return next(error);
@@ -43,7 +45,9 @@ router.post("/add", async (req, res, next) => {
     let isUserAlreadyInContact;
 
     try {
-      isUserAlreadyInContact = existingUser.contacts.find((cont) => cont.toString() === isUsersMessageBoxExist.id);
+      isUserAlreadyInContact = existingUser.messageBoxes.find(
+        (cont) => cont.toString() === isUsersMessageBoxExist.id
+      );
       // isUserAlreadyInContact = await User.findOne({contacts: contact});
     } catch (err) {
       console.log(err);
@@ -58,9 +62,9 @@ router.post("/add", async (req, res, next) => {
 
     try {
       const sess = await mongoose.startSession();
-      existingUser.contacts.push(isUsersMessageBoxExist.id);
-      await existingUser.save({ session: sess });
       sess.startTransaction();
+      existingUser.messageBoxes.push(isUsersMessageBoxExist.id);
+      await existingUser.save({ session: sess });
       await sess.commitTransaction();
     } catch (err) {
       console.log(err);
@@ -82,8 +86,12 @@ router.post("/add", async (req, res, next) => {
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    existingUser.contacts.push(newMessageBox.id);
+    existingUser.messageBoxes.push(newMessageBox.id);
+    existingUser.contacts.push(contact);
+    isContactValid.messageBoxes.push(newMessageBox.id);
+    isContactValid.contacts.push(userId);
     await existingUser.save({ session: sess });
+    await isContactValid.save({ session: sess });
     await newMessageBox.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
