@@ -1,15 +1,15 @@
 import React from "react";
 
 import classes from "./ContactComponent.module.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const ContactComponent= (props) => {
-  const {name, _id: userId} = props.contact;
+const ContactComponent = (props) => {
+  const { name, _id: userId } = props.contact;
   const navigate = useNavigate();
 
   const openChatBtnHandler = () => {
-    navigate(`/chat/?user=${userId}`, {replace: true});
-  }
+    navigate(`/chat/?user=${userId}`, { replace: true });
+  };
   return (
     <li onClick={openChatBtnHandler} className={classes.Contact_component}>
       <div className={classes.contact_detail_section}>
