@@ -23,6 +23,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  messageBoxes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Usermessagebox",
+    },
+  ],
   contacts: [
     {
       type: Schema.Types.ObjectId,
@@ -32,7 +38,7 @@ const userSchema = new Schema({
   pinnedContacts: [
     {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Usermessagebox",
     },
   ],
 });
