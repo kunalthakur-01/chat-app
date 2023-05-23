@@ -1,11 +1,31 @@
 import React from "react";
 
 import classes from "./AllMessages.module.scss";
+import { useSearchParams } from "react-router-dom";
 
-const AllMessages = () => {
+const AllMessages = ({ messages }) => {
+  // console.log(messages);
+  const getUserByQueryParam = useSearchParams()[0].get("user");
   return (
     <div className={classes.allMessages}>
-      <div className={`${classes.message} ${classes.left}`}>
+      {messages?.map((message) => (
+        <div
+          key={message._id}
+          className={`${classes.message} ${
+            message.userId === getUserByQueryParam
+              ? classes.left
+              : classes.right
+          }`}
+        >
+          <p>{message.message}</p>
+          <span>
+            {new Date(message.time).getHours()}:
+            {new Date(message.time).getMinutes()}{" "}
+            {new Date(message.time).getHours() > 12 ? "PM" : "AM"}
+          </span>
+        </div>
+      ))}
+      {/* <div className={`${classes.message} ${classes.left}`}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate
           aspernatur quae aperiam rem illo non?
@@ -37,7 +57,7 @@ const AllMessages = () => {
       <div className={`${classes.message} ${classes.left}`}>
         <p>bs vdia</p>
         <span>9:40 PM</span>
-      </div>
+      </div> */}
     </div>
   );
 };
