@@ -58,39 +58,33 @@ router.post("/send", async (req, res, next) => {
 });
 
 
-router.get("/:id", async (req, res, next) => {
-  const { senderId, receiverId, message, time } = req.body;
-  let sender, receiver;
+router.get("/get/:user1/:user2", async (req, res, next) => {
+  const user1 = req.params.user1;
+  const user2 = req.params.user2;
+  let isUsersMessageBoxExist;
 
   try {
-    sender = await UserMessageBox.findOne({ userId: senderId });
-    receiver = await UserMessageBox.findOne({ userId: receiverId });
+    isUsersMessageBoxExist =
+      (await UserMessageBox.findOne({
+        user1: user1,
+        user2: user2,
+      })) ||
+      (await UserMessageBox.findOne({
+        user1: user2,
+        user2: user1,
+      }));
   } catch (err) {
     console.log(err);
     const error = new httpError("Something went wrong", 500);
     return next(error);
   }
 
-  if (!sender && !receiver) {
-    const error = new httpError("User does not exist", 401);
+  if(!isUsersMessageBoxExist) {
+    const error = new httpError("Couldn't found", 404);
     return next(error);
   }
 
-  try {
-    const sess = await mongoose.startSession();
-    sess.startTransaction();
-    sender.outMessages.push({ receiverid: receiverId, message, time });
-    await sender.save({ session: sess });
-    receiver.inMessages.push({ senderId: senderId, message, time });
-    await receiver.save({ session: sess });
-    await sess.commitTransaction();
-  } catch (err) {
-    console.log(err);
-    const error = new httpError("message not sent", 424);
-    return next(error);
-  }
-
-  res.status(201).json({ message: "sent successfully" });
+  res.status(201).json({ messageBox: isUsersMessageBoxExist });
 });
 
 module.exports = router;
