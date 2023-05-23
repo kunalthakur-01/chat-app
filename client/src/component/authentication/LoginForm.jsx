@@ -25,7 +25,7 @@ const LoginForm  = () => {
 
   useEffect(() => {
     if(data && !error) {
-      ctx.login(data, null);
+      ctx.login({...data.user}, null);
     }
   }, [ctx, data, error]);
 
