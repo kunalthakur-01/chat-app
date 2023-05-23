@@ -1,30 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import classes from "./MessageBox.module.scss";
 import MessageBoxDetail from "./MessageBoxDetail";
 import MessagesArea from "./message-area/MessagesArea";
 import SendMessageForm from "./SendMessageForm";
+import useHttp from "../../../hooks/http-hook";
+import { getMessages } from "../../../api/other-apis/messageApi";
+import { UserContextManage } from "../../../context/UserContext";
 
 const MessageBox = () => {
   const getUserByQueryParam = useSearchParams()[0].get("user");
-  const navigate = useNavigate()
-  console.log(navigate)
+  const ctx = useContext(UserContextManage);
+
+  const { sendRequest, data, error, status } = useHttp(getMessages);
+
+  useEffect(() => {
+    if(getUserByQueryParam) {
+      sendRequest({user1: ctx.userData?._id, user2: getUserByQueryParam});
+    }
+  }, [getUserByQueryParam]);
 
   if (!getUserByQueryParam) {
     return <div className={`${classes.start_conversation_section} box_container`}>
       <h1>Start conversation💫</h1>
-    </div>;
+    </div>
   }
-  // else navigate('/', {replace: true})
 
-  
+  if(status === 'pending') {
+    return <div style={{display: 'grid', placeContent: 'center'}} className="box_container">
+      <h1>Loading...</h1>
+    </div>
+  }
+
+  // console.log(data)
 
   return (
     <div className={`${classes.message_box_section} box_container`}>
-      <MessageBoxDetail />
+      <MessageBoxDetail aboutContact={getUserByQueryParam} />
       <hr className={classes.message_box_section_hr} />
-      <MessagesArea />
+      <MessagesArea messages={data?.messageBox.allMessages} />
       <SendMessageForm />
     </div>
   );
