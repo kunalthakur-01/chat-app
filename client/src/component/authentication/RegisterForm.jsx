@@ -30,7 +30,7 @@ const RegisterForm  = () => {
     }
   }, [status, error]);
 
-  if(status === 'pending') {
+  if(status === 'pending' || status === 'completed') {
     return <div style={{width: '100%', height: '100vh'}}>Loading...</div>
   }
 
