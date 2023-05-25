@@ -18,7 +18,7 @@ const MessageBoxDetail = (props) => {
           alt="contact"
         />
         <div className={classes.about_detail}>
-          <h3>{contactDetails.name}</h3>
+          <h3>{contactDetails?.name}</h3>
           <p>Online</p>
         </div>
       </div>
