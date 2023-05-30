@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import classes from "./MessageBox.module.scss";
 import MessageBoxDetail from "./MessageBoxDetail";
