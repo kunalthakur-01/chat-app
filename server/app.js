@@ -44,11 +44,7 @@ mongoose
     console.log("connected");
     const server = app.listen(5000);
     
-    const io = require('socket.io')(server, {
-      cors: {
-        origin: '*',
-      }
-    });
+    const io = require('./socket').init(server);
     io.on('connection', socket => {
       console.log('client connected');
     })
