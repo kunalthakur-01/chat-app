@@ -3,6 +3,7 @@ const User = require("../models/userModel");
 const httpError = require("../models/httpErrorModel");
 const UserMessageBox = require("../models/userMessageBoxModel");
 const mongoose = require("mongoose");
+const io = require('../socket');
 
 const router = express.Router();
 
@@ -41,6 +42,8 @@ router.post("/send", async (req, res, next) => {
       time
     });
     await isUsersMessageBoxExist.save({ session: sess });
+    
+    io.sendMessage(receiverId, isUsersMessageBoxExist.allMessages.pop());
 
     // sender.outMessages.push({ receiverid: receiverId, message, time });
     // receiver.inMessages.push({ senderId: senderId, message, time });
