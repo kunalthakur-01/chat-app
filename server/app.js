@@ -38,16 +38,35 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
+global.onlineUsers = new Map();
+
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {
     console.log("connected");
     const server = app.listen(5000);
-    
-    const io = require('./socket').init(server);
-    io.on('connection', socket => {
-      console.log('client connected');
-    })
+
+    const getSocket = require("./socket");
+    const io = getSocket.init(server);
+    io.on("connection", (socket) => {
+      console.log("client connected", socket.id);
+      global.chatSocket = socket;
+
+      // socket.on("add-user", (userId) => {
+      //   console.log(userId);
+      //   onlineUsers.set(userId, socket.id);
+      // });
+      socket.on("add-user", (userId) => {
+        getSocket.addOnlineUsers(userId, socket.id);
+      });
+
+      // socket.on("send-message", (data) => {
+      //   const sendUserSocket = onlineUsers.get(data.to);
+      //   if(sendUserSocket) socket.to(sendUserSocket).emit('msg-receive', data.msg);
+      // });
+
+      // socket.on("send-message", getSocket.sendMessage);
+    });
   })
   .catch((err) => {
     console.log(err);
