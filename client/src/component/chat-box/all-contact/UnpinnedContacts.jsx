@@ -13,7 +13,7 @@ const UnpinnedContacts = (props) => {
         <MdOutlineMessage /> &nbsp; All Message
       </p>
       <ul className={classes.all_messages_list}>
-        {props.contacts.map(contact => <ContactComponent key={contact._id} contact={contact} />)}
+        {props.contacts.map(contact => <ContactComponent arrivedMessage={props.arrivedMessage} key={contact._id} contact={contact} />)}
       </ul>
     </div>
   )

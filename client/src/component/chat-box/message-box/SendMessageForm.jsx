@@ -8,7 +8,7 @@ import { sendMessage } from "../../../api/other-apis/messageApi";
 import { UserContextManage } from "../../../context/UserContext";
 import { useSearchParams } from "react-router-dom";
 
-const SendMessageForm = (props) => {
+const SendMessageForm = () => {
   const { sendRequest, data, error, status } = useHttp(sendMessage);
   const getUserByQueryParam = useSearchParams()[0].get("user");
   const [message, setMessage] = useState();
@@ -16,6 +16,7 @@ const SendMessageForm = (props) => {
 
   const SendMessageForm = (e) => {
     e.preventDefault();
+    
     message && sendRequest({senderId: ctx.userData._id, receiverId: getUserByQueryParam, message, time: new Date().toISOString()});
 
     setMessage("");

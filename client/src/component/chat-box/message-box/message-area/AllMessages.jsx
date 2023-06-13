@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import classes from "./AllMessages.module.scss";
 import { useSearchParams } from "react-router-dom";
 
 const AllMessages = ({ messages }) => {
-  // console.log(messages);
+  const scrollRef = useRef();
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ block: 'end' })
+  }, [messages]);
+  console.log(messages);
   const getUserByQueryParam = useSearchParams()[0].get("user");
   return (
-    <div className={classes.allMessages}>
+    <div className={classes.allMessages} ref={scrollRef}>
       {messages?.map((message) => (
         <div
           key={message._id}

@@ -7,7 +7,7 @@ import PinnedContacts from "./PinnedContacts";
 import UnpinnedContacts from "./UnpinnedContacts";
 import { UserContextManage } from "../../../context/UserContext";
 
-const AllContacts = () => {
+const AllContacts = ({ arrivedMessage }) => {
   const ctx = useContext(UserContextManage);
   return (
     <div className={`${classes.all_contacts_section} box_container`}>
@@ -19,10 +19,10 @@ const AllContacts = () => {
       </div>
       <div className={classes.all_messages}>
         {!!ctx.userData?.pinnedContacts.length && (
-          <PinnedContacts contacts={ctx.userData?.pinnedContacts} />
+          <PinnedContacts arrivedMessage={arrivedMessage} contacts={ctx.userData?.pinnedContacts} />
         )}
         {!!ctx.userData?.contacts.length && (
-          <UnpinnedContacts contacts={ctx.userData?.contacts} />
+          <UnpinnedContacts arrivedMessage={arrivedMessage} contacts={ctx.userData?.contacts} />
         )}
         {ctx.userData &&
           ctx.userData.contacts.length === 0 &&

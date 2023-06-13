@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ContactComponent = (props) => {
   const { name, _id: userId } = props.contact;
   const navigate = useNavigate();
+  console.log(props.arrivedMessage)
 
   const openChatBtnHandler = () => {
     navigate(`/chat/?user=${userId}`, { replace: true });
@@ -24,7 +25,7 @@ const ContactComponent = (props) => {
       </div>
       <div className={classes.message_status}>
         <time>12:30 AM</time>
-        <span>2</span>
+       {!!props.arrivedMessage?.length && <span>{props.arrivedMessage?.length}</span>}
       </div>
     </li>
   );

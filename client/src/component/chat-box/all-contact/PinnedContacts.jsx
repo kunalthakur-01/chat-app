@@ -12,7 +12,7 @@ const PinnedContacts = (props) => {
         <TbPinnedFilled /> Pinned Message
       </p>
       <ul className={classes.pinned_messages_list}>
-        {props.contacts.map(contact => <ContactComponent key={contact._id} contact={contact} />)}
+        {props.contacts.map(contact => <ContactComponent arrivedMessage={props.arrivedMessage} key={contact._id} contact={contact} />)}
       </ul>
     </div>
   );
