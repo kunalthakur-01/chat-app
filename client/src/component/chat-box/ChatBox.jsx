@@ -6,12 +6,12 @@ import AdminPanel from "./admin-panel/AdminPanel";
 import AllContacts from "./all-contact/AllContacts";
 import MessageBox from "./message-box/MessageBox";
 
-const ChatBox = () => {
+const ChatBox = ({arrivedMessage}) => {
   return (
     <section className={classes.chatbox_section}>
       <AdminPanel />
-      <AllContacts />
-      <MessageBox />
+      <AllContacts arrivedMessage={arrivedMessage} />
+      <MessageBox arrivedMessage={arrivedMessage} />
     </section>
   );
 };
